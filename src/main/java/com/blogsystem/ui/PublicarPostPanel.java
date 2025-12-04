@@ -108,7 +108,6 @@ public class PublicarPostPanel extends JPanel {
         JPanel tituloPanel = crearCampoConEtiqueta(lblTitulo, txtTitulo);
         formPanel.add(tituloPanel, formGbc);
         
-        // Campo Contenido
         txtContenido = new JTextArea(6, 30);
         txtContenido.setFont(new Font("Arial", Font.PLAIN, 14));
         txtContenido.setBackground(new Color(51, 65, 85));
@@ -133,7 +132,6 @@ public class PublicarPostPanel extends JPanel {
         JPanel contenidoPanel = crearCampoConEtiqueta(lblContenido, scrollContenido);
         formPanel.add(contenidoPanel, formGbc);
         
-        // Panel de botones
         JPanel botonesPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 15, 0));
         botonesPanel.setBackground(new Color(30, 41, 59));
         formGbc.gridy = 3;
@@ -141,7 +139,7 @@ public class PublicarPostPanel extends JPanel {
         JButton btnPublicar = new JButton("Publicar");
         btnPublicar.setPreferredSize(new Dimension(120, 40));
         btnPublicar.setFont(new Font("Segoe UI", Font.BOLD, 14));
-        btnPublicar.setBackground(new Color(129, 199, 132)); // Verde claro
+        btnPublicar.setBackground(new Color(129, 199, 132));
         btnPublicar.setForeground(Color.BLACK);
         btnPublicar.setFocusPainted(false);
         btnPublicar.setBorder(BorderFactory.createCompoundBorder(
@@ -154,7 +152,7 @@ public class PublicarPostPanel extends JPanel {
         JButton btnCancelar = new JButton("Cancelar");
         btnCancelar.setPreferredSize(new Dimension(120, 40));
         btnCancelar.setFont(new Font("Segoe UI", Font.BOLD, 14));
-        btnCancelar.setBackground(new Color(239, 154, 154)); // Rojo claro
+        btnCancelar.setBackground(new Color(239, 154, 154));
         btnCancelar.setForeground(Color.BLACK);
         btnCancelar.setFocusPainted(false);
         btnCancelar.setBorder(BorderFactory.createCompoundBorder(
@@ -191,6 +189,7 @@ public class PublicarPostPanel extends JPanel {
         return panel;
     }
     
+    // Carga todos los autores disponibles en el ComboBox
     public void cargarAutores() {
         try {
             autores = autorDAO.listarTodos();
@@ -213,6 +212,7 @@ public class PublicarPostPanel extends JPanel {
         }
     }
     
+    // Valida y guarda un nuevo post en la base de datos
     private void publicarPost() {
         String titulo = txtTitulo.getText().trim();
         String contenido = txtContenido.getText().trim();

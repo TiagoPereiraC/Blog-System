@@ -160,6 +160,7 @@ public class RegistrarAutorPanel extends JPanel {
         return panel;
     }
     
+    // Valida y registra un nuevo autor en la base de datos
     private void registrarAutor() {
         String nombre = txtNombre.getText().trim();
         String email = txtEmail.getText().trim();

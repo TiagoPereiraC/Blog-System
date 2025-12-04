@@ -83,6 +83,7 @@ public class VerPostsPanel extends JPanel {
         cargarPosts();
     }
     
+    // Carga todos los posts y comentarios desde la base de datos
     public void cargarPosts() {
         postsContainer.removeAll();
         
@@ -115,6 +116,7 @@ public class VerPostsPanel extends JPanel {
         postsContainer.repaint();
     }
     
+    // Crea el panel visual de un post con sus comentarios
     private JPanel crearPostPanel(Post post) {
         JPanel panel = new JPanel();
         panel.setLayout(new BorderLayout(10, 10));
@@ -125,7 +127,6 @@ public class VerPostsPanel extends JPanel {
         ));
         panel.setMaximumSize(new Dimension(520, Integer.MAX_VALUE));
         
-        // Panel superior con título y autor
         JPanel topPanel = new JPanel(new BorderLayout());
         topPanel.setBackground(new Color(30, 41, 59));
         
@@ -134,7 +135,6 @@ public class VerPostsPanel extends JPanel {
         lblTitulo.setForeground(Color.WHITE);
         topPanel.add(lblTitulo, BorderLayout.NORTH);
         
-        // Panel de contenido
         JPanel contentPanel = new JPanel();
         contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.Y_AXIS));
         contentPanel.setBackground(new Color(30, 41, 59));
@@ -151,7 +151,6 @@ public class VerPostsPanel extends JPanel {
         
         contentPanel.add(txtContenido);
         
-        // Sección de comentarios
         JPanel comentariosPanel = new JPanel();
         comentariosPanel.setLayout(new BoxLayout(comentariosPanel, BoxLayout.Y_AXIS));
         comentariosPanel.setBackground(new Color(30, 41, 59));
@@ -167,7 +166,6 @@ public class VerPostsPanel extends JPanel {
         comentariosPanel.add(lblComentarios);
         comentariosPanel.add(Box.createVerticalStrut(5));
         
-        // Cargar comentarios del post
         try {
             List<Comentario> comentarios = comentarioDAO.buscarPorPost(post.getId());
             
@@ -188,11 +186,10 @@ public class VerPostsPanel extends JPanel {
             e.printStackTrace();
         }
         
-        // Botón para agregar comentario
         JButton btnAgregarComentario = new JButton("+ Agregar Comentario");
         btnAgregarComentario.setAlignmentX(Component.LEFT_ALIGNMENT);
         btnAgregarComentario.setFont(new Font("Segoe UI", Font.BOLD, 12));
-        btnAgregarComentario.setBackground(new Color(100, 181, 246)); // Azul claro
+        btnAgregarComentario.setBackground(new Color(100, 181, 246));
         btnAgregarComentario.setForeground(Color.BLACK);
         btnAgregarComentario.setFocusPainted(false);
         btnAgregarComentario.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -244,6 +241,7 @@ public class VerPostsPanel extends JPanel {
         return panel;
     }
     
+    // Muestra diálogo para agregar un nuevo comentario
     private void mostrarDialogoComentario(Post post) {
         JDialog dialog = new JDialog((Frame) SwingUtilities.getWindowAncestor(this), "Agregar Comentario", true);
         dialog.setSize(400, 300);
@@ -324,7 +322,7 @@ public class VerPostsPanel extends JPanel {
                 comentarioDAO.salvar(nuevoComentario);
                 JOptionPane.showMessageDialog(dialog, "Comentario agregado exitosamente", "Éxito", JOptionPane.INFORMATION_MESSAGE);
                 dialog.dispose();
-                cargarPosts(); // Recargar posts para mostrar el nuevo comentario
+                cargarPosts();
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(dialog, "Error al guardar comentario: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }

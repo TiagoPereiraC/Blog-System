@@ -135,6 +135,7 @@ public class EditarEliminarPanel extends JPanel {
         cargarPosts();
     }
     
+    // Carga todos los posts disponibles para editar o eliminar
     public void cargarPosts() {
         postsContainer.removeAll();
         
@@ -167,6 +168,7 @@ public class EditarEliminarPanel extends JPanel {
         postsContainer.repaint();
     }
     
+    // Filtra los posts por nombre de autor
     private void buscarPorAutor() {
         String nombreAutor = txtBuscar.getText().trim();
         
@@ -206,6 +208,7 @@ public class EditarEliminarPanel extends JPanel {
         postsContainer.repaint();
     }
     
+    // Crea el panel de un post con botones de editar y eliminar
     private JPanel crearPostEditablePanel(Post post) {
         JPanel panel = new JPanel();
         panel.setLayout(new BorderLayout(10, 10));
@@ -216,7 +219,6 @@ public class EditarEliminarPanel extends JPanel {
         ));
         panel.setMaximumSize(new Dimension(520, Integer.MAX_VALUE));
         
-        // Panel de información
         JPanel infoPanel = new JPanel();
         infoPanel.setLayout(new BoxLayout(infoPanel, BoxLayout.Y_AXIS));
         infoPanel.setBackground(new Color(30, 41, 59));
@@ -235,14 +237,13 @@ public class EditarEliminarPanel extends JPanel {
         infoPanel.add(Box.createVerticalStrut(5));
         infoPanel.add(lblTitulo);
         
-        // Panel de botones
         JPanel botonesPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 0));
         botonesPanel.setBackground(new Color(30, 41, 59));
         
         JButton btnEditar = new JButton("Editar");
         btnEditar.setPreferredSize(new Dimension(110, 38));
         btnEditar.setFont(new Font("Segoe UI", Font.BOLD, 13));
-        btnEditar.setBackground(new Color(129, 199, 132)); // Verde claro
+        btnEditar.setBackground(new Color(129, 199, 132));
         btnEditar.setForeground(Color.BLACK);
         btnEditar.setFocusPainted(false);
         btnEditar.setBorder(BorderFactory.createCompoundBorder(
@@ -255,7 +256,7 @@ public class EditarEliminarPanel extends JPanel {
         JButton btnEliminar = new JButton("Eliminar");
         btnEliminar.setPreferredSize(new Dimension(110, 38));
         btnEliminar.setFont(new Font("Segoe UI", Font.BOLD, 13));
-        btnEliminar.setBackground(new Color(239, 154, 154)); // Rojo claro
+        btnEliminar.setBackground(new Color(239, 154, 154));
         btnEliminar.setForeground(Color.BLACK);
         btnEliminar.setFocusPainted(false);
         btnEliminar.setBorder(BorderFactory.createCompoundBorder(
@@ -274,6 +275,7 @@ public class EditarEliminarPanel extends JPanel {
         return panel;
     }
     
+    // Muestra diálogo para editar un post existente
     private void editarPost(Post post) {
         JDialog dialog = new JDialog((Frame) SwingUtilities.getWindowAncestor(this), "Editar Post", true);
         dialog.setSize(500, 400);
@@ -381,6 +383,7 @@ public class EditarEliminarPanel extends JPanel {
         dialog.setVisible(true);
     }
     
+    // Elimina un post con confirmación del usuario
     private void eliminarPost(Post post) {
         int confirmacion = JOptionPane.showConfirmDialog(this, 
             "¿Está seguro de eliminar el post '" + post.getTitulo() + "'?", 
