@@ -15,13 +15,17 @@ public class HibernateUtil {
         try {
             Properties properties = new Properties();
             
-            // Configuração do Banco de Dados
+            String dbUrl = System.getenv().getOrDefault("DB_URL", "jdbc:mysql://localhost:3306/blog_db?serverTimezone=UTC");
+            String dbUser = System.getenv().getOrDefault("DB_USER", "root");
+            String dbPass = System.getenv().getOrDefault("DB_PASS", "");
+
+            // Configuración de la Base de Datos
             properties.setProperty("hibernate.connection.driver_class", "com.mysql.cj.jdbc.Driver");
-            properties.setProperty("hibernate.connection.url", "jdbc:mysql://localhost:3306/blog_db?useSSL=false&serverTimezone=UTC");
-            properties.setProperty("hibernate.connection.username", "root");
-            properties.setProperty("hibernate.connection.password", "");
+            properties.setProperty("hibernate.connection.url", dbUrl);
+            properties.setProperty("hibernate.connection.username", dbUser);
+            properties.setProperty("hibernate.connection.password", dbPass);
             
-            // Configuração do Hibernate
+            // Configuración de Hibernate
             properties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");
             properties.setProperty("hibernate.show_sql", "true");
             properties.setProperty("hibernate.format_sql", "true");
